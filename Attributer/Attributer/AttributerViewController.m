@@ -7,6 +7,7 @@
 //
 
 #import "AttributerViewController.h"
+#import "TextStatsViewController.h"
 
 @interface AttributerViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *body;
@@ -16,6 +17,18 @@
 @end
 
 @implementation AttributerViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Analyze Text"])
+    {
+        if ([segue.destinationViewController isKindOfClass:[TextStatsViewController class]])
+        {
+            TextStatsViewController *tsvc = (TextStatsViewController *)segue.destinationViewController;
+            tsvc.textToAnalyze = self.body.textStorage;
+        }
+    }
+}
 
 - (void)viewDidLoad
 {
